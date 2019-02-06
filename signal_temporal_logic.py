@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 ##
 #
 # Code for specifing STL formulas and evaluating the robustness
@@ -8,37 +6,6 @@
 ##
 
 import numpy as np
-
-class Predicate:
-    """
-    An STL predicate in the form
-
-        mu(s) >= c
-
-    where mu : R^n --> R is a (usually linear) function and 
-    c \in R is a constant. 
-    """
-    def __init__(self, mu, c):
-        """
-        Arguments:
-            mu : a function that maps a (n,) numpy array to a scalar value
-            c  : a scalar value
-        """
-        self.mu = mu
-        self.c = c
-
-    def robustness(self, s, t):
-        """
-        Return the robustness degree of signal s at time t:
-
-            rho(s, mu(s), t) = mu(s[t]) - c
-
-        Arguments:
-            s : a (T, n) numpy array representing an STL signal
-            t : an integer <=T representing a timestep
-
-        """
-        return mu(s[t,:]) - c
 
 class STLFormula:
     """
@@ -163,8 +130,4 @@ class STLFormula:
         new_formula = STLFormula(new_robustness)
 
         return new_formula
-
-
-
-
 
