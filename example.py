@@ -7,7 +7,8 @@
 #
 ##
 
-from signal_temporal_logic import *
+import numpy as np
+from pySTL import STLFormula
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
