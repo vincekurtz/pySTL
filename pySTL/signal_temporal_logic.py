@@ -103,31 +103,3 @@ class STLFormula:
 
         return new_formula
 
-    def until(self, second_formula, t1, t2):
-        """
-        Return a new STL Formula object which represents this formula holding
-        until second_formula holds, at all times in [t+t1, t+t2]. 
-
-            rho(s, phi1 U_[t1,t2] phi2, t) =
-                    max_{t' in [t+t1, t+t2]}( min(
-                            rho(s,phi1,t'), min_{t'' in [t,t']}(rho(s,phi2,t''))))
-
-        Arguments:
-            second_formula : an STL Formula or predicate defined over the same signal s.
-            t1 : an integer between 0 and signal length T
-            t2 : an integer between t1 and signal length T
-        """
-        def new_robustness(s,t):
-            rho = max([
-                    min([
-                         self.robustness(s,tp),
-                         min([second_formula.robustness(s,tpp) for tpp in range(t,tp+1)])
-                        ])
-                    for tp in range(t+t1, t+t2+1)])
-
-            return rho
-
-        new_formula = STLFormula(new_robustness)
-
-        return new_formula
-
